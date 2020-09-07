@@ -1,0 +1,30 @@
+
+.poster-bg {
+	height: 100%;
+	width: 100%;
+	left: 0;
+	top: 0;
+	font-size: 0;
+	position: fixed;
+	z-index: -1;
+}
+.detail {
+	height: 100%;
+	width: 100%;
+	min-height: 100%;
+	background-color: rgba(30, 41, 61, 0.7);
+	text-align: center;
+	color: #FFFFFF;
+}
+.detail-container {
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+}
+.pic {
+	width: 60%;
+	margin: 0 auto;
+	overflow: hidden;
+}
+

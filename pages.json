@@ -1,0 +1,47 @@
+{
+	"easycom": {
+		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		}, {
+            "path" : "pages/player/index/index",
+            "style" : {}
+        }, {
+            "path" : "pages/detailInfo/index",
+            "style" : {}
+        }
+    ],
+	"tabBar": {
+		"color": "#7f8389",
+		"selectedColor": "#333333",
+		"borderStyle": "white",
+		"backgroundColor": "#FFFFFF",
+		"fontSize": "12px",
+		"list": [{
+			"pagePath": "pages/index/index",
+			"iconPath": "static/icon/diamond.png",
+			"selectedIconPath": "static/icon/diamond_s.png",
+			"text": "推荐"
+		}, {
+			"pagePath": "pages/index/index",
+			"iconPath": "static/icon/yuan.png",
+			"selectedIconPath": "static/icon/yuan_s.png",
+			"text": "发现"
+		}, {
+			"pagePath": "pages/index/index",
+			"iconPath": "static/icon/form.png",
+			"selectedIconPath": "static/icon/form_s.png",
+			"text": "书架"
+		}]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarBackgroundColor": "#ffffff",
+		"backgroundColor": "#ffffff"
+	}
+}

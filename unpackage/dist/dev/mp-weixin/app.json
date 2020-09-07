@@ -1,0 +1,42 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/player/index/index",
+    "pages/detailInfo/index"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#ffffff"
+  },
+  "tabBar": {
+    "color": "#7f8389",
+    "selectedColor": "#333333",
+    "borderStyle": "white",
+    "backgroundColor": "#FFFFFF",
+    "fontSize": "12px",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/icon/diamond.png",
+        "selectedIconPath": "static/icon/diamond_s.png",
+        "text": "推荐"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/icon/yuan.png",
+        "selectedIconPath": "static/icon/yuan_s.png",
+        "text": "发现"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/icon/form.png",
+        "selectedIconPath": "static/icon/form_s.png",
+        "text": "书架"
+      }
+    ]
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap61.json"
+}
