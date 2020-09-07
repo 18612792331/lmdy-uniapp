@@ -5,12 +5,12 @@
 		</view>
 		<view class="detail">
 			<view>
-				<span class="g-font-46">捉妖记</span>
-				<span>2015年</span>
+				<span class="g-font-46">{{data.name}}</span>
+				<span v-if="data.year">{{data.year}}</span>
 			</view>
 			<view class="detail-container">
 				<view style="margin-top: 30rpx;">
-					<image style="width: 60%;" :src="data.cover"></image>
+					<image mode="aspectFit" style="width: 60%;" :src="data.cover"></image>
 				</view>
 				<view style="margin-top: 30rpx;">
 					<u-button shape="square" type="primary" size="medium" :ripple="true" ripple-bg-color="#69d1e1">立即播放</u-button>
@@ -23,6 +23,19 @@
 				<p v-if="data.language">语言：<span>{{ data.language }}</span></p>
 				<p v-if="data.director">导演：<span>{{ data.director }}</span></p>
 				<p v-if="data.actor">主演：<span>{{ data.actor.join(', ') }}</span></p>
+				<p v-if="data.introduce">简介：<span>{{ data.introduce }}</span></p>
+				<p>选集：</p>
+				<view>
+					<view v-for="(item, index) in data.resources" :key="index" class="nav" :class="{ choose:current == index}" @click="cho(index)">{{item.label}}</view>
+				</view>
+				<view>
+					<view v-for="(item, index) in data.resources" :key="index" v-if="index==current" class="player_box">
+						<view v-for="(data, index2) in item.links" :key="index2" class="box_child" @click="play(data)">{{data.title}}</view>
+					</view>
+				</view>
+			</view>
+			<view>
+
 			</view>
 		</view>
 
@@ -35,17 +48,27 @@
 		data() {
 			return {
 				data: {},
+				current: 0,
 
 			}
 		},
 		methods: {
+			play(item) {
+				this.data.current = item
+				this.$u.route({
+					url: '/pages/player/index/index',
+					params: {
+						data: JSON.stringify(this.data)
+					}
+				})
+			},
+			cho(index) {
+				this.current = index
+			}
 
 		},
 		onLoad(option) {
 			this.data = JSON.parse(option.data)
-			console.log(this.data)
-
-
 		},
 	}
 </script>
@@ -81,5 +104,28 @@
 		width: 60%;
 		margin: 0 auto;
 		overflow: hidden;
+	}
+
+	.nav {
+		display: inline-block;
+	}
+
+	.choose {
+		color: #007AFF;
+	}
+
+	.player_box {
+		margin-top: 20px;
+		width: 100%;
+		text-align: center;
+		display: flex;
+		align-content: flex-start;
+		flex-flow: row wrap;
+		justify-content: space-around;
+	}
+
+	.box_child {
+		flex: 0 0 20%;
+		margin-bottom: 20px;
 	}
 </style>

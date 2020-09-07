@@ -1,8 +1,8 @@
 <template>
 	<view>
 		<view>
-			<video id="myVideo" src="https://douban.donghongzuida.com/20200718/5734_f1fc9c36/index.m3u8"
-			 @error="videoErrorCallback" controls></video>
+			<video id="myVideo" src="https://douban.donghongzuida.com/20200718/5734_f1fc9c36/index.m3u8" @error="videoErrorCallback"
+			 controls></video>
 		</view>
 	</view>
 </template>
@@ -11,7 +11,7 @@
 	export default {
 		data() {
 			return {
-
+				data: {},
 			}
 		},
 		methods: {
@@ -21,7 +21,11 @@
 					showCancel: false
 				})
 			},
-		}
+		},
+		onLoad(option) {
+			this.data = JSON.parse(option.data)
+			console.log(this.data)
+		},
 	}
 </script>
 

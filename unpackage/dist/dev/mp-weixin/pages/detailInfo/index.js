@@ -177,22 +177,45 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
     return {
-      data: {} };
+      data: {},
+      current: 0 };
 
 
   },
-  methods: {},
+  methods: {
+    play: function play(item) {
+      this.data.current = item;
+      this.$u.route({
+        url: '/pages/player/index/index',
+        params: {
+          data: JSON.stringify(this.data) } });
+
+
+    },
+    cho: function cho(index) {
+      this.current = index;
+    } },
 
 
   onLoad: function onLoad(option) {
     this.data = JSON.parse(option.data);
-    console.log(this.data);
-
-
   } };exports.default = _default;
 
 /***/ }),

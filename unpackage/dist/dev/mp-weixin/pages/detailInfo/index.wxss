@@ -27,4 +27,32 @@
 	margin: 0 auto;
 	overflow: hidden;
 }
+.nav {
+	display: inline-block;
+}
+.choose {
+	color: #007AFF;
+}
+.player_box {
+	margin-top: 20px;
+	width: 100%;
+	text-align: center;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-align-content: flex-start;
+	        align-content: flex-start;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-flow: row wrap;
+	        flex-flow: row wrap;
+	-webkit-justify-content: space-around;
+	        justify-content: space-around;
+}
+.box_child {
+	-webkit-box-flex: 0;
+	-webkit-flex: 0 0 20%;
+	        flex: 0 0 20%;
+	margin-bottom: 20px;
+}
 

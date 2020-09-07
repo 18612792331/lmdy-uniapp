@@ -10,14 +10,25 @@
 			<u-section title="热门推荐" font-size="35" sub-title="查看更多"></u-section>
 		</view>
 		<view class="dy_box">
-			<view class="box_child" v-for="(item, index) in data" @click="detail(item)">
+			<view class="box_child" v-for="(item, index) in dyData" @click="detail(item)">
 				<u-image width="100%" height="300rpx" fade="true" :duration="1000" border-radius="20" :src="item.cover"></u-image>
 				<span class="tip">{{item.state}}</span>
 				<view>
 					<p>{{item.name}}</p>
 				</view>
 			</view>
-
+		</view>
+		<view style="margin-top: 28rpx;">
+			<u-section title="热门好剧" font-size="35" sub-title="查看更多"></u-section>
+		</view>
+		<view class="dy_box">
+			<view class="box_child" v-for="(item, index) in dsjData" @click="detail(item)">
+				<u-image width="100%" height="300rpx" fade="true" :duration="1000" border-radius="20" :src="item.cover"></u-image>
+				<span class="tip">{{item.state}}</span>
+				<view>
+					<p>{{item.name}}</p>
+				</view>
+			</view>
 		</view>
 
 
@@ -28,7 +39,8 @@
 	export default {
 		data() {
 			return {
-				data: [],
+				dyData: [],
+				dsjData: [],
 				pageUtil: {
 					pageNo: 1,
 					pageSize: 6,
@@ -37,15 +49,11 @@
 			}
 		},
 		onLoad() {
-			this.page();
+			this.dyPage();
+			this.dsjPage();
 
 		},
 		methods: {
-			play() {
-				uni.navigateTo({
-					url: '/pages/player/index/index'
-				});
-			},
 			detail(item) {
 				this.$u.route({
 					url: 'pages/detailInfo/index',
@@ -54,14 +62,23 @@
 					}
 				})
 			},
-			page() {
+			dyPage() {
 				let uri = '/page?pageNo=' + this.pageUtil.pageNo + '&pageSize=' + this.pageUtil.pageSize + '&type=' + this.pageUtil
 					.type
 				this.$u.get(uri, {
 
 				}).then(res => {
-					this.data = res.content
+					this.dyData = res.content
 
+				})
+			},
+			dsjPage() {
+				let uri = '/page?pageNo=1&pageSize=' + this.pageUtil.pageSize + '&type=2'
+				this.$u.get(uri, {
+			
+				}).then(res => {
+					this.dsjData = res.content
+			
 				})
 			}
 
@@ -99,7 +116,6 @@
 	.box_child {
 		flex: 0 0 30%;
 		margin-bottom: 20px;
-
 	}
 
 	.tip {

@@ -140,7 +140,18 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -170,7 +181,8 @@ var _default =
 {
   data: function data() {
     return {
-      data: [],
+      dyData: [],
+      dsjData: [],
       pageUtil: {
         pageNo: 1,
         pageSize: 6,
@@ -179,15 +191,11 @@ var _default =
 
   },
   onLoad: function onLoad() {
-    this.page();
+    this.dyPage();
+    this.dsjPage();
 
   },
   methods: {
-    play: function play() {
-      uni.navigateTo({
-        url: '/pages/player/index/index' });
-
-    },
     detail: function detail(item) {
       this.$u.route({
         url: 'pages/detailInfo/index',
@@ -196,17 +204,25 @@ var _default =
 
 
     },
-    page: function page() {var _this = this;
+    dyPage: function dyPage() {var _this = this;
       var uri = '/page?pageNo=' + this.pageUtil.pageNo + '&pageSize=' + this.pageUtil.pageSize + '&type=' + this.pageUtil.
       type;
       this.$u.get(uri, {}).
 
       then(function (res) {
-        _this.data = res.content;
+        _this.dyData = res.content;
+
+      });
+    },
+    dsjPage: function dsjPage() {var _this2 = this;
+      var uri = '/page?pageNo=1&pageSize=' + this.pageUtil.pageSize + '&type=2';
+      this.$u.get(uri, {}).
+
+      then(function (res) {
+        _this2.dsjData = res.content;
 
       });
     } } };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
