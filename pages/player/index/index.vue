@@ -1,9 +1,16 @@
 <template>
 	<view>
 		<view>
-			<video id="myVideo" src="https://douban.donghongzuida.com/20200718/5734_f1fc9c36/index.m3u8" @error="videoErrorCallback"
-			 controls></video>
+			<video style="width: 100%;" id="myVideo" :src="data.current.link" @error="videoErrorCallback" controls></video>
 		</view>
+		<view class="detail-container">
+			<view>
+				<p style="color: #2b85e4;font: italic bold 12px/30px Georgia, serif;">当前播放：<span style="color: #a0cfff;">{{data.current.title}}</span></p>
+
+				<u-line color="#2b85e4" />
+			</view>
+		</view>
+
 	</view>
 </template>
 
@@ -24,11 +31,12 @@
 		},
 		onLoad(option) {
 			this.data = JSON.parse(option.data)
-			console.log(this.data)
 		},
 	}
 </script>
 
 <style>
-
+	p {
+		font: italic bold 12px/30px Georgia, serif;
+	}
 </style>

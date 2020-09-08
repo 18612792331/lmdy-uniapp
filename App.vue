@@ -13,7 +13,9 @@
 </script>
 
 <style lang="scss">
-	@import './common/app.css';
-	/*每个页面公共css */
 	@import "uview-ui/index.scss";
+	/*每个页面公共css */
+	@import './common/app.css';
+	
+	
 </style>

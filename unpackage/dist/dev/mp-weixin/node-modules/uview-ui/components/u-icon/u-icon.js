@@ -85,15 +85,23 @@ var render = function() {
 
   var s1 = _vm.isImg ? _vm.__get_style([_vm.imgStyle]) : null
   var s2 = !_vm.isImg ? _vm.__get_style([_vm.iconStyle]) : null
-  var g0 = _vm.label ? _vm.$u.addUnit(_vm.labelSize) : null
+  var g0 = _vm.label !== "" ? _vm.$u.addUnit(_vm.labelSize) : null
   var g1 =
-    _vm.label && _vm.labelPos == "right" ? _vm.$u.addUnit(_vm.marginLeft) : null
+    _vm.label !== "" && _vm.labelPos == "right"
+      ? _vm.$u.addUnit(_vm.marginLeft)
+      : null
   var g2 =
-    _vm.label && _vm.labelPos == "bottom" ? _vm.$u.addUnit(_vm.marginTop) : null
+    _vm.label !== "" && _vm.labelPos == "bottom"
+      ? _vm.$u.addUnit(_vm.marginTop)
+      : null
   var g3 =
-    _vm.label && _vm.labelPos == "left" ? _vm.$u.addUnit(_vm.marginRight) : null
+    _vm.label !== "" && _vm.labelPos == "left"
+      ? _vm.$u.addUnit(_vm.marginRight)
+      : null
   var g4 =
-    _vm.label && _vm.labelPos == "top" ? _vm.$u.addUnit(_vm.marginBottom) : null
+    _vm.label !== "" && _vm.labelPos == "top"
+      ? _vm.$u.addUnit(_vm.marginBottom)
+      : null
   _vm.$mp.data = Object.assign(
     {},
     {
@@ -143,6 +151,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
 //
 //
 //
@@ -224,7 +233,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
     // 图标右边或者下面的文字
     label: {
-      type: String,
+      type: [String, Number],
       default: '' },
 
     // label的位置，只能右边或者下边

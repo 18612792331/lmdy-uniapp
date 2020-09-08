@@ -1,11 +1,11 @@
 <template>
-	<view>
+	<view style="font-family: '宋体';">
 		<view class="poster-bg">
 			<image style="height: 100%;width: 100%;" mode="aspectFill" :src="data.cover"></image>
 		</view>
 		<view class="detail">
 			<view>
-				<span class="g-font-46">{{data.name}}</span>
+				<span class="g-font-46" style="text-shadow: 5px 6px 2px #83ACDB">{{data.name}}</span>
 				<span v-if="data.year">{{data.year}}</span>
 			</view>
 			<view class="detail-container">
@@ -13,7 +13,7 @@
 					<image mode="aspectFit" style="width: 60%;" :src="data.cover"></image>
 				</view>
 				<view style="margin-top: 30rpx;">
-					<u-button shape="square" type="primary" size="medium" :ripple="true" ripple-bg-color="#69d1e1">立即播放</u-button>
+					<u-button shape="square" type="primary" size="medium" :ripple="true" ripple-bg-color="#69d1e1" @click="mplay">立即播放</u-button>
 				</view>
 			</view>
 			<view style="text-align: left; margin: 30rpx 40rpx 30rpx 40rpx;">
@@ -23,9 +23,9 @@
 				<p v-if="data.language">语言：<span>{{ data.language }}</span></p>
 				<p v-if="data.director">导演：<span>{{ data.director }}</span></p>
 				<p v-if="data.actor">主演：<span>{{ data.actor.join(', ') }}</span></p>
-				<p v-if="data.introduce">简介：<span>{{ data.introduce }}</span></p>
-				<p>选集：</p>
-				<view>
+				<p v-if="data.introduce" style="font:italic 12px/30px Georgia,serif;">简介：<span>{{ data.introduce }}</span></p>
+				<!-- <p>选集：</p> -->
+				<view style="margin-top: 30rpx;">
 					<view v-for="(item, index) in data.resources" :key="index" class="nav" :class="{ choose:current == index}" @click="cho(index)">{{item.label}}</view>
 				</view>
 				<view>
@@ -53,6 +53,16 @@
 			}
 		},
 		methods: {
+			mplay() {
+				this.data.current = this.data.resources[0].links[0]
+				this.$u.route({
+					url: '/pages/player/index/index',
+					params: {
+						data: JSON.stringify(this.data)
+					}
+				})
+				
+			},
 			play(item) {
 				this.data.current = item
 				this.$u.route({
@@ -74,15 +84,7 @@
 </script>
 
 <style>
-	.poster-bg {
-		height: 100%;
-		width: 100%;
-		left: 0;
-		top: 0;
-		font-size: 0;
-		position: fixed;
-		z-index: -1;
-	}
+	
 
 	.detail {
 		height: 100%;
@@ -93,12 +95,7 @@
 		color: #FFFFFF;
 	}
 
-	.detail-container {
-		padding-right: 15px;
-		padding-left: 15px;
-		margin-right: auto;
-		margin-left: auto;
-	}
+	
 
 	.pic {
 		width: 60%;
@@ -108,10 +105,12 @@
 
 	.nav {
 		display: inline-block;
+		margin-left: 20rpx;
 	}
 
 	.choose {
 		color: #007AFF;
+		border-bottom:3px solid #007AFF
 	}
 
 	.player_box {
@@ -127,5 +126,6 @@
 	.box_child {
 		flex: 0 0 20%;
 		margin-bottom: 20px;
+	
 	}
 </style>

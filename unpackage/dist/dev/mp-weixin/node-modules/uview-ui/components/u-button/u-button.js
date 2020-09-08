@@ -110,13 +110,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var s0 = _vm.__get_style([_vm.customStyle])
+  var s0 = _vm.__get_style([
+    _vm.customStyle,
+    {
+      overflow: _vm.ripple ? "hidden" : "visible"
+    }
+  ])
 
+  var m0 = Number(_vm.hoverStartTime)
+  var m1 = Number(_vm.hoverStayTime)
   _vm.$mp.data = Object.assign(
     {},
     {
       $root: {
-        s0: s0
+        s0: s0,
+        m0: m0,
+        m1: m1
       }
     }
   )
@@ -154,6 +163,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
 //
 //
 //
@@ -364,7 +376,17 @@ __webpack_require__.r(__webpack_exports__);
     // 节流，一定时间内只能触发一次
     throttleTime: {
       type: [String, Number],
-      default: 1000 } },
+      default: 1000 },
+
+    // 按住后多久出现点击态，单位毫秒
+    hoverStartTime: {
+      type: [String, Number],
+      default: 20 },
+
+    // 手指松开后点击态保留时间，单位毫秒
+    hoverStayTime: {
+      type: [String, Number],
+      default: 150 } },
 
 
   computed: {

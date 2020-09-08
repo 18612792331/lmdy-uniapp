@@ -8075,11 +8075,11 @@ Request = /*#__PURE__*/function () {_createClass(Request, [{ key: "setConfig",
               }
             } else {
               // 不返回原始数据的情况下，服务器状态码不为200，modal弹框提示
-              if (response.errMsg) {
-                uni.showModal({
-                  title: response.errMsg });
-
-              }
+              // if(response.errMsg) {
+              // 	uni.showModal({
+              // 		title: response.errMsg
+              // 	});
+              // }
               reject(response);
             }
           }
@@ -8455,12 +8455,18 @@ function array(value) {
   }
 }
 
-
 /**
    * 是否对象
    */
 function object(value) {
   return Object.prototype.toString.call(value) === '[object Object]';
+}
+
+/**
+   * 是否短信验证码
+   */
+function code(value) {var len = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 6;
+  return new RegExp("^\\d{".concat(len, "}$")).test(value);
 }var _default =
 
 
@@ -8486,7 +8492,8 @@ function object(value) {
   jsonString: jsonString,
   landline: landline,
   object: object,
-  array: array };exports.default = _default;
+  array: array,
+  code: code };exports.default = _default;
 
 /***/ }),
 /* 17 */
@@ -9315,8 +9322,8 @@ throttle;exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // 此版本发布于2020-08-12
-var version = '1.6.2';var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // 此版本发布于2020-09-07
+var version = '1.6.8';var _default =
 
 {
   v: version,

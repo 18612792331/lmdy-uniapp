@@ -1,13 +1,4 @@
 
-.poster-bg {
-	height: 100%;
-	width: 100%;
-	left: 0;
-	top: 0;
-	font-size: 0;
-	position: fixed;
-	z-index: -1;
-}
 .detail {
 	height: 100%;
 	width: 100%;
@@ -16,12 +7,6 @@
 	text-align: center;
 	color: #FFFFFF;
 }
-.detail-container {
-	padding-right: 15px;
-	padding-left: 15px;
-	margin-right: auto;
-	margin-left: auto;
-}
 .pic {
 	width: 60%;
 	margin: 0 auto;
@@ -29,9 +14,11 @@
 }
 .nav {
 	display: inline-block;
+	margin-left: 20rpx;
 }
 .choose {
 	color: #007AFF;
+	border-bottom:3px solid #007AFF
 }
 .player_box {
 	margin-top: 20px;

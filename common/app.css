@@ -27,6 +27,24 @@
 .g-font-46 {
 	font-size: 46rpx;
 }
+
 .g-text-center {
 	text-align: center;
+}
+
+.poster-bg {
+	height: 100%;
+	width: 100%;
+	left: 0;
+	top: 0;
+	font-size: 0;
+	position: fixed;
+	z-index: -1;
+}
+
+.detail-container {
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
 }

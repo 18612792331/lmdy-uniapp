@@ -720,6 +720,10 @@
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: inline-flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
   -webkit-box-align: center;
   -webkit-align-items: center;
           align-items: center;

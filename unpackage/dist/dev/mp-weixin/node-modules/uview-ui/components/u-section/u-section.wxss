@@ -25,9 +25,15 @@
 /* 透明度 */
 /* 文章场景相关 */
 .u-section.data-v-a3f2467a {
+
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
           justify-content: space-between;
@@ -40,9 +46,15 @@
   position: relative;
   font-size: 28rpx;
   padding-left: 20rpx;
+
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+
   -webkit-box-align: center;
   -webkit-align-items: center;
           align-items: center;
@@ -56,9 +68,15 @@
 .u-section__right-info.data-v-a3f2467a {
   color: #909399;
   font-size: 26rpx;
+
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+
   -webkit-box-align: center;
   -webkit-align-items: center;
           align-items: center;

@@ -200,6 +200,16 @@ var _default =
 
   },
   methods: {
+    mplay: function mplay() {
+      this.data.current = this.data.resources[0].links[0];
+      this.$u.route({
+        url: '/pages/player/index/index',
+        params: {
+          data: JSON.stringify(this.data) } });
+
+
+
+    },
     play: function play(item) {
       this.data.current = item;
       this.$u.route({
