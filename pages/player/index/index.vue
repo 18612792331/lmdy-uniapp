@@ -11,9 +11,10 @@
 			<view style="display: flex;justify-content: space-around;">
 				<p style="font-weight: 300;color: #f29100 ;">P2P加速，把本片分享给朋友一起来组队加速吧！</p>
 				<!-- <u-button size="mini" type="warning" shape="square">分享</u-button> -->
-				<u-icon name="weixin-fill" color="#ff9900" size="36" label="分享" label-size="25" label-color="#ff9900"></u-icon>
-
+				<!-- <u-icon name="weixin-fill" color="#ff9900" size="36" label="分享" label-size="25" label-color="#ff9900" open-type="share"></u-icon> -->
+				<button class="share-btn" open-type="share" size="mini" type="primary">分享</button>
 			</view>
+			
 			<view>
 				<view style="margin-top: 30rpx;">
 					<view v-for="(item, index) in data.resources" :key="index" class="nav" :class="{ choose:data.current.index == index}" @click="cho(index)">{{item.label}}</view>
@@ -46,10 +47,17 @@
 			},
 			cho(index) {
 				this.data.current.index = index
-			}
+			},
+			
 		},
 		onLoad(option) {
 			this.data = JSON.parse(option.data)
+			this.$u.mpShare = {
+				title: this.data.name + '  在线观看', // 默认为小程序名称，可自定义
+				// 分享图标，路径可以是本地文件路径、代码包文件路径或者网络图片路径。
+				// 支持PNG及JPG，默认为当前页面的截图
+				imageUrl: this.data.cover
+			}
 		},
 	}
 </script>
