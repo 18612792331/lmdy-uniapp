@@ -48,3 +48,32 @@
 	margin-right: auto;
 	margin-left: auto;
 }
+
+.nav {
+	display: inline-block;
+	margin-left: 20rpx;
+}
+
+.choose {
+	color: #2b85e4;
+	border-bottom: 3px solid #2b85e4
+}
+
+.player_box {
+	margin-top: 20px;
+	width: 100%;
+	text-align: center;
+	display: flex;
+	align-content: flex-start;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+}
+
+.box_child {
+	flex: 0 0 20%;
+	margin-bottom: 20px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+}

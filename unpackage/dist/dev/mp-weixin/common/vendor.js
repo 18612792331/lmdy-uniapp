@@ -862,11 +862,6 @@ function initProperties(props) {var isBehavior = arguments.length > 1 && argumen
       type: String,
       value: '' };
 
-    // 用于字节跳动小程序模拟抽象节点
-    properties.generic = {
-      type: Object,
-      value: null };
-
     properties.vueSlots = { // 小程序不能直接定义 $slots 的 props，所以通过 vueSlots 转换到 $slots
       type: null,
       value: [],
@@ -1165,17 +1160,14 @@ function handleEvent(event) {var _this = this;
             }
             handler.once = true;
           }
-          var params = processEventArgs(
+          ret.push(handler.apply(handlerCtx, processEventArgs(
           _this.$vm,
           event,
           eventArray[1],
           eventArray[2],
           isCustom,
-          methodName);
+          methodName)));
 
-          // 参数尾部增加原始事件对象用于复杂表达式内获取额外数据
-          // eslint-disable-next-line no-sparse-arrays
-          ret.push(handler.apply(handlerCtx, (Array.isArray(params) ? params : []).concat([,,,,,,,,,, event])));
         }
       });
     }
@@ -7523,7 +7515,7 @@ function internalMixin(Vue) {
   };
 
   Vue.prototype.__map = function(val, iteratee) {
-    //TODO 暂不考虑 string
+    //TODO 暂不考虑 string,number
     var ret, i, l, keys, key;
     if (Array.isArray(val)) {
       ret = new Array(val.length);
@@ -7537,13 +7529,6 @@ function internalMixin(Vue) {
       for (i = 0, l = keys.length; i < l; i++) {
         key = keys[i];
         ret[key] = iteratee(val[key], key, i);
-      }
-      return ret
-    } else if (typeof val === 'number') {
-      ret = new Array(val);
-      for (i = 0, l = val; i < l; i++) {
-        // 第一个参数暂时仍和小程序一致
-        ret[i] = iteratee(i, i);
       }
       return ret
     }
@@ -7672,9 +7657,9 @@ module.exports = g;
 
 /***/ }),
 /* 4 */
-/*!*****************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/pages.json ***!
-  \*****************************************/
+/*!*************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/pages.json ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -7815,9 +7800,9 @@ function normalizeComponent (
 
 /***/ }),
 /* 11 */
-/*!*************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/index.js ***!
-  \*************************************************************/
+/*!*********************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/index.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7961,9 +7946,9 @@ var install = function install(Vue) {
 
 /***/ }),
 /* 12 */
-/*!************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/mixin/mixin.js ***!
-  \************************************************************************/
+/*!********************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/mixin/mixin.js ***!
+  \********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8002,9 +7987,9 @@ var install = function install(Vue) {
 
 /***/ }),
 /* 13 */
-/*!**************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/request/index.js ***!
-  \**************************************************************************/
+/*!**********************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/request/index.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8182,9 +8167,9 @@ new Request();exports.default = _default;
 
 /***/ }),
 /* 14 */
-/*!*******************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/function/deepMerge.js ***!
-  \*******************************************************************************/
+/*!***************************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/function/deepMerge.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8222,9 +8207,9 @@ deepMerge;exports.default = _default;
 
 /***/ }),
 /* 15 */
-/*!*******************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/function/deepClone.js ***!
-  \*******************************************************************************/
+/*!***************************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/function/deepClone.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8255,9 +8240,9 @@ deepClone;exports.default = _default;
 
 /***/ }),
 /* 16 */
-/*!**************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/function/test.js ***!
-  \**************************************************************************/
+/*!**********************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/function/test.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8497,9 +8482,9 @@ function code(value) {var len = arguments.length > 1 && arguments[1] !== undefin
 
 /***/ }),
 /* 17 */
-/*!*********************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/function/queryParams.js ***!
-  \*********************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/function/queryParams.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8565,9 +8550,9 @@ queryParams;exports.default = _default;
 
 /***/ }),
 /* 18 */
-/*!***************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/function/route.js ***!
-  \***************************************************************************/
+/*!***********************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/function/route.js ***!
+  \***********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8661,9 +8646,9 @@ route;exports.default = _default;
 
 /***/ }),
 /* 19 */
-/*!********************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/function/timeFormat.js ***!
-  \********************************************************************************/
+/*!****************************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/function/timeFormat.js ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8723,9 +8708,9 @@ timeFormat;exports.default = _default;
 
 /***/ }),
 /* 20 */
-/*!******************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/function/timeFrom.js ***!
-  \******************************************************************************/
+/*!**************************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/function/timeFrom.js ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8779,9 +8764,9 @@ timeFrom;exports.default = _default;
 
 /***/ }),
 /* 21 */
-/*!***********************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/function/colorGradient.js ***!
-  \***********************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/function/colorGradient.js ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8888,9 +8873,9 @@ function rgbToHex(rgb) {
 
 /***/ }),
 /* 22 */
-/*!**************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/function/guid.js ***!
-  \**************************************************************************/
+/*!**********************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/function/guid.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8939,9 +8924,9 @@ guid;exports.default = _default;
 
 /***/ }),
 /* 23 */
-/*!***************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/function/color.js ***!
-  \***************************************************************************/
+/*!***********************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/function/color.js ***!
+  \***********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8986,9 +8971,9 @@ color;exports.default = _default;
 
 /***/ }),
 /* 24 */
-/*!*******************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/function/type2icon.js ***!
-  \*******************************************************************************/
+/*!***************************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/function/type2icon.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9031,9 +9016,9 @@ type2icon;exports.default = _default;
 
 /***/ }),
 /* 25 */
-/*!*********************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/function/randomArray.js ***!
-  \*********************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/function/randomArray.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9048,9 +9033,9 @@ randomArray;exports.default = _default;
 
 /***/ }),
 /* 26 */
-/*!*****************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/function/addUnit.js ***!
-  \*****************************************************************************/
+/*!*************************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/function/addUnit.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9066,9 +9051,9 @@ function addUnit() {var value = arguments.length > 0 && arguments[0] !== undefin
 
 /***/ }),
 /* 27 */
-/*!****************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/function/random.js ***!
-  \****************************************************************************/
+/*!************************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/function/random.js ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9086,9 +9071,9 @@ random;exports.default = _default;
 
 /***/ }),
 /* 28 */
-/*!**************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/function/trim.js ***!
-  \**************************************************************************/
+/*!**********************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/function/trim.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9111,9 +9096,9 @@ trim;exports.default = _default;
 
 /***/ }),
 /* 29 */
-/*!***************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/function/toast.js ***!
-  \***************************************************************************/
+/*!***********************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/function/toast.js ***!
+  \***********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9131,9 +9116,9 @@ toast;exports.default = _default;
 
 /***/ }),
 /* 30 */
-/*!*******************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/function/getParent.js ***!
-  \*******************************************************************************/
+/*!***************************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/function/getParent.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9188,9 +9173,9 @@ function getParent(name, keys) {
 
 /***/ }),
 /* 31 */
-/*!*****************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/function/$parent.js ***!
-  \*****************************************************************************/
+/*!*************************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/function/$parent.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9216,9 +9201,9 @@ function $parent() {var name = arguments.length > 0 && arguments[0] !== undefine
 
 /***/ }),
 /* 32 */
-/*!*************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/function/sys.js ***!
-  \*************************************************************************/
+/*!*********************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/function/sys.js ***!
+  \*********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9234,9 +9219,9 @@ function sys() {
 
 /***/ }),
 /* 33 */
-/*!******************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/function/debounce.js ***!
-  \******************************************************************************/
+/*!**************************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/function/debounce.js ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9273,9 +9258,9 @@ debounce;exports.default = _default;
 
 /***/ }),
 /* 34 */
-/*!******************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/function/throttle.js ***!
-  \******************************************************************************/
+/*!**************************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/function/throttle.js ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9315,9 +9300,9 @@ throttle;exports.default = _default;
 
 /***/ }),
 /* 35 */
-/*!**************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/config/config.js ***!
-  \**************************************************************************/
+/*!**********************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/config/config.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9338,9 +9323,9 @@ var version = '1.6.8';var _default =
 
 /***/ }),
 /* 36 */
-/*!**************************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/node_modules/uview-ui/libs/config/zIndex.js ***!
-  \**************************************************************************/
+/*!**********************************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/node_modules/uview-ui/libs/config/zIndex.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9367,9 +9352,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 37 */
-/*!************************************************************!*\
-  !*** D:/PROJECT/uniapp/lmdy/common/http.interceptor.js.js ***!
-  \************************************************************/
+/*!********************************************************************!*\
+  !*** E:/RESOURCE/uniapp/lmdy-uniapp/common/http.interceptor.js.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

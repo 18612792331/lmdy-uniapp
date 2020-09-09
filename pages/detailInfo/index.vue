@@ -16,7 +16,7 @@
 					<u-button shape="square" type="primary" size="medium" :ripple="true" ripple-bg-color="#69d1e1" @click="mplay">立即播放</u-button>
 				</view>
 			</view>
-			<view style="text-align: left; margin: 30rpx 40rpx 30rpx 40rpx;">
+			<view style="text-align: left; margin: 30rpx 40rpx 30rpx 40rpx;line-height: 60rpx;">
 				<p v-if="data.alias">别名：<span>{{ data.alias.replace('：', '') }}</span></p>
 				<p v-if="data.genre">类型：<span>{{ data.genre }}</span></p>
 				<p v-if="data.area">地区：<span>{{ data.area }}</span></p>
@@ -55,6 +55,7 @@
 		methods: {
 			mplay() {
 				this.data.current = this.data.resources[0].links[0]
+				this.data.current.index = this.current;
 				this.$u.route({
 					url: '/pages/player/index/index',
 					params: {
@@ -64,7 +65,8 @@
 				
 			},
 			play(item) {
-				this.data.current = item
+				this.data.current = item;
+				this.data.current.index = this.current;
 				this.$u.route({
 					url: '/pages/player/index/index',
 					params: {
@@ -103,29 +105,5 @@
 		overflow: hidden;
 	}
 
-	.nav {
-		display: inline-block;
-		margin-left: 20rpx;
-	}
 
-	.choose {
-		color: #007AFF;
-		border-bottom:3px solid #007AFF
-	}
-
-	.player_box {
-		margin-top: 20px;
-		width: 100%;
-		text-align: center;
-		display: flex;
-		align-content: flex-start;
-		flex-flow: row wrap;
-		justify-content: space-around;
-	}
-
-	.box_child {
-		flex: 0 0 20%;
-		margin-bottom: 20px;
-	
-	}
 </style>

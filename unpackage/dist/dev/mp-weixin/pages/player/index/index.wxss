@@ -2,4 +2,9 @@
 ._p {
 	font: italic bold 12px/30px Georgia, serif;
 }
+.titlech {
+	background-color: #2b85e4;
+	color: #FFFFFF;
+	border-radius: 15rpx;
+}
 

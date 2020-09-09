@@ -1,13 +1,28 @@
 <template>
-	<view>
+	<view style="font-family: '宋体';">
 		<view>
 			<video style="width: 100%;" id="myVideo" :src="data.current.link" @error="videoErrorCallback" controls></video>
 		</view>
 		<view class="detail-container">
 			<view>
 				<p style="color: #2b85e4;font: italic bold 12px/30px Georgia, serif;">当前播放：<span style="color: #a0cfff;">{{data.current.title}}</span></p>
+				<u-line color="#a0cfff" />
+			</view>
+			<view style="display: flex;justify-content: space-around;">
+				<p style="font-weight: 300;color: #f29100 ;">P2P加速，把本片分享给朋友一起来组队加速吧！</p>
+				<!-- <u-button size="mini" type="warning" shape="square">分享</u-button> -->
+				<u-icon name="weixin-fill" color="#ff9900" size="36" label="分享" label-size="25" label-color="#ff9900"></u-icon>
 
-				<u-line color="#2b85e4" />
+			</view>
+			<view>
+				<view style="margin-top: 30rpx;">
+					<view v-for="(item, index) in data.resources" :key="index" class="nav" :class="{ choose:data.current.index == index}" @click="cho(index)">{{item.label}}</view>
+				</view>
+				<view>
+					<view v-for="(item, index) in data.resources" :key="index" v-if="index==current" class="player_box">
+						<view v-for="(item2, index2) in item.links" :key="index2" class="box_child" :class="{ titlech:item2.link == data.current.link}" @click="play(item2)">{{item2.title}}</view>
+					</view>
+				</view>
 			</view>
 		</view>
 
@@ -18,6 +33,7 @@
 	export default {
 		data() {
 			return {
+				current: 0,
 				data: {},
 			}
 		},
@@ -28,6 +44,9 @@
 					showCancel: false
 				})
 			},
+			cho(index) {
+				this.data.current.index = index
+			}
 		},
 		onLoad(option) {
 			this.data = JSON.parse(option.data)
@@ -38,5 +57,10 @@
 <style>
 	p {
 		font: italic bold 12px/30px Georgia, serif;
+	}
+	.titlech {
+		background-color: #2b85e4;
+		color: #FFFFFF;
+		border-radius: 15rpx;
 	}
 </style>

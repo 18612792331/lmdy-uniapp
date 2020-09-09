@@ -82,6 +82,40 @@
 	margin-right: auto;
 	margin-left: auto;
 }
+.nav {
+	display: inline-block;
+	margin-left: 20rpx;
+}
+.choose {
+	color: #2b85e4;
+	border-bottom: 3px solid #2b85e4
+}
+.player_box {
+	margin-top: 20px;
+	width: 100%;
+	text-align: center;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-align-content: flex-start;
+	        align-content: flex-start;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-flow: row wrap;
+	        flex-flow: row wrap;
+	-webkit-box-pack: start;
+	-webkit-justify-content: flex-start;
+	        justify-content: flex-start;
+}
+.box_child {
+	-webkit-box-flex: 0;
+	-webkit-flex: 0 0 20%;
+	        flex: 0 0 20%;
+	margin-bottom: 20px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 .u-relative,
 .u-rela {
   position: relative;
