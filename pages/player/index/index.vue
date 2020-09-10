@@ -48,6 +48,11 @@
 			cho(index) {
 				this.data.current.index = index
 			},
+			play(item) {
+				this.data.current = item;
+				this.data.current.index = this.current;
+				
+			},
 			
 		},
 		onLoad(option) {

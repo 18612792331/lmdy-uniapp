@@ -3,18 +3,18 @@
 		<view class="status_bar">
 			<!-- 这里是状态栏 -->
 		</view>
-		<view class="search_bar" @click="gotosearch">
+		<view class="search_bar" @click="gotosearch" style="width: 70%;">
 			<u-search placeholder="搜索电影名" :clearabled="true" :show-action="false" bg-color="#f7f9fa" disabled="false"></u-search>
 		</view>
 		<view style="margin-top: 28rpx;">
-			<u-section title="热门推荐" font-size="35" sub-title="查看更多"></u-section>
+			<u-section title="热门电影" font-size="35" sub-title="查看更多" @click="dyMore(1)"></u-section>
 		</view>
 		<view class="dy_box">
 			<view class="box_child" v-for="(item, index) in dyData" @click="detail(item)">
 				<u-image width="100%" height="300rpx" fade="true" :duration="1000" border-radius="20" :src="item.cover"></u-image>
-				<span class="tip">{{item.state}}</span>
+				<view class="tip">{{item.state}}</view>
 				<view>
-					<p>{{item.name}}</p>
+					<p class="name">{{item.name}}</p>
 				</view>
 			</view>
 		</view>
@@ -54,6 +54,14 @@
 
 		},
 		methods: {
+			dyMore(type) {
+				this.$u.route({
+					url: 'pages/list/index',
+					params: {
+						type: type
+					}
+				})
+			},
 			detail(item) {
 				this.$u.route({
 					url: 'pages/detailInfo/index',
@@ -75,10 +83,10 @@
 			dsjPage() {
 				let uri = '/page?pageNo=1&pageSize=' + this.pageUtil.pageSize + '&type=2'
 				this.$u.get(uri, {
-			
+
 				}).then(res => {
 					this.dsjData = res.content
-			
+
 				})
 			}
 
@@ -104,7 +112,7 @@
 	}
 
 	.dy_box {
-		margin-top: 20px;
+		margin-top: 10px;
 		width: 100%;
 		text-align: center;
 		display: flex;
@@ -115,17 +123,27 @@
 
 	.box_child {
 		flex: 0 0 30%;
-		margin-bottom: 20px;
+		margin-bottom: 10px;
+		position: relative;
+		text-align: center;
 	}
 
 	.tip {
-		width: 100%;
-		padding-left: 5px;
-		background-color: rgba(0, 0, 0, .50);
-		color: #FFFFFF;
-		font-size: 23rpx;
-		position: relative;
-		left: 0px;
-		bottom: 45rpx;
+		background: #000;
+		opacity: 0.5;
+		color: #fff;
+		width: 90%;
+		position: absolute;
+		bottom: 19px;
+		left: 12rpx;
+		font-size: 25rpx;
+		border-radius: 10rpx;
+	}
+	.name {
+		color: #303133 ;
+		font-weight: 800;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 </style>
