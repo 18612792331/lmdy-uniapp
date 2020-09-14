@@ -1,7 +1,7 @@
 <template>
 	<view style="font-family: '宋体';">
 		<view>
-			<video style="width: 100%;" id="myVideo" :src="data.current.link" @error="videoErrorCallback" controls></video>
+			<video style="width: 100%;" :title="data.name" autoplay="true" show-progress="true" :poster="data.cover" id="myVideo" :src="data.current.link" controls></video>
 		</view>
 		<view class="detail-container">
 			<view>
@@ -10,8 +10,6 @@
 			</view>
 			<view style="display: flex;justify-content: space-around;">
 				<p style="font-weight: 300;color: #f29100 ;">P2P加速，把本片分享给朋友一起来组队加速吧！</p>
-				<!-- <u-button size="mini" type="warning" shape="square">分享</u-button> -->
-				<!-- <u-icon name="weixin-fill" color="#ff9900" size="36" label="分享" label-size="25" label-color="#ff9900" open-type="share"></u-icon> -->
 				<button class="share-btn" open-type="share" size="mini" type="primary">分享</button>
 			</view>
 			
@@ -20,7 +18,7 @@
 					<view v-for="(item, index) in data.resources" :key="index" class="nav" :class="{ choose:data.current.index == index}" @click="cho(index)">{{item.label}}</view>
 				</view>
 				<view>
-					<view v-for="(item, index) in data.resources" :key="index" v-if="index==current" class="player_box">
+					<view v-for="(item, index) in data.resources" :key="index" v-if="index==data.current.index" class="player_box">
 						<view v-for="(item2, index2) in item.links" :key="index2" class="box_child" :class="{ titlech:item2.link == data.current.link}" @click="play(item2)">{{item2.title}}</view>
 					</view>
 				</view>
@@ -34,7 +32,6 @@
 	export default {
 		data() {
 			return {
-				current: 0,
 				data: {},
 			}
 		},
@@ -49,13 +46,14 @@
 				this.data.current.index = index
 			},
 			play(item) {
-				this.data.current = item;
-				this.data.current.index = this.current;
+				this.data.current.title = item.title;
+				this.data.current.link = item.link;
 				
 			},
 			
 		},
 		onLoad(option) {
+			
 			this.data = JSON.parse(option.data)
 			this.$u.mpShare = {
 				title: this.data.name + '  在线观看', // 默认为小程序名称，可自定义
@@ -64,6 +62,20 @@
 				imageUrl: this.data.cover
 			}
 		},
+		onReady() {
+			uni.setNavigationBarColor({
+			    frontColor: '#ffffff',
+			    backgroundColor: '#2b85e4',
+			    animation: {
+			        duration: 1500,
+			        timingFunc: 'easeIn'
+			    }
+			})
+			uni.setNavigationBarTitle({
+			    title: this.data.name
+			});
+			
+		}
 	}
 </script>
 

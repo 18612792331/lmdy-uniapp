@@ -28,10 +28,6 @@
   margin-left: 16rpx;
   margin-right: 16rpx;
 }
-.status_bar {
-  height: 25px;
-  width: 100%;
-}
 .search_bar {
   width: 100%;
   margin-top: 4rpx;
@@ -74,8 +70,5 @@
 .name {
   color: #303133;
   font-weight: 800;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 

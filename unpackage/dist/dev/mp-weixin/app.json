@@ -3,7 +3,9 @@
     "pages/index/index",
     "pages/player/index/index",
     "pages/detailInfo/index",
-    "pages/list/index"
+    "pages/list/index",
+    "pages/repo/index/index",
+    "pages/search/index/index"
   ],
   "subPackages": [],
   "window": {
@@ -25,7 +27,7 @@
         "text": "推荐"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/repo/index/index",
         "iconPath": "static/icon/yuan.png",
         "selectedIconPath": "static/icon/yuan_s.png",
         "text": "发现"
@@ -38,5 +40,6 @@
       }
     ]
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap2.json"
 }

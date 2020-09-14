@@ -1,0 +1,59 @@
+
+.tab {
+	margin-top: 10rpx;
+	width: 100%;
+	text-align: center;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-justify-content: space-around;
+	        justify-content: space-around;
+}
+.tab-c {
+	color: #82848a;
+}
+.tabcchoose {
+	color: #ff9900;
+	font-size: 40rpx;
+	font-weight: bold;
+}
+.dy_box {
+	margin-top: 10px;
+	width: 100%;
+	text-align: center;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-align-content: flex-start;
+	        align-content: flex-start;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-flow: row wrap;
+	        flex-flow: row wrap;
+	-webkit-justify-content: space-around;
+	        justify-content: space-around;
+}
+.box_child {
+	-webkit-box-flex: 0;
+	-webkit-flex: 0 0 30%;
+	        flex: 0 0 30%;
+	margin-bottom: 10px;
+	position: relative;
+	text-align: center;
+}
+.tip {
+	background: #000;
+	opacity: 0.5;
+	color: #fff;
+	width: 90%;
+	position: absolute;
+	bottom: 19px;
+	left: 12rpx;
+	font-size: 25rpx;
+	border-radius: 10rpx;
+}
+.name {
+	color: #303133 ;
+	font-weight: 800;
+}
+

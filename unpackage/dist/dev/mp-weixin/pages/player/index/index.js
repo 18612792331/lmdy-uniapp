@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   uLine: function() {
-    return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-line/u-line */ "node-modules/uview-ui/components/u-line/u-line").then(__webpack_require__.bind(null, /*! uview-ui/components/u-line/u-line.vue */ 90))
+    return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-line/u-line */ "node-modules/uview-ui/components/u-line/u-line").then(__webpack_require__.bind(null, /*! uview-ui/components/u-line/u-line.vue */ 106))
   }
 }
 var render = function() {
@@ -164,13 +164,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 var _default =
 {
   data: function data() {
     return {
-      current: 0,
       data: {} };
 
   },
@@ -185,19 +182,34 @@ var _default =
       this.data.current.index = index;
     },
     play: function play(item) {
-      this.data.current = item;
-      this.data.current.index = this.current;
+      this.data.current.title = item.title;
+      this.data.current.link = item.link;
 
     } },
 
 
   onLoad: function onLoad(option) {
+
     this.data = JSON.parse(option.data);
     this.$u.mpShare = {
       title: this.data.name + '  在线观看', // 默认为小程序名称，可自定义
       // 分享图标，路径可以是本地文件路径、代码包文件路径或者网络图片路径。
       // 支持PNG及JPG，默认为当前页面的截图
       imageUrl: this.data.cover };
+
+  },
+  onReady: function onReady() {
+    uni.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#2b85e4',
+      animation: {
+        duration: 1500,
+        timingFunc: 'easeIn' } });
+
+
+    uni.setNavigationBarTitle({
+      title: this.data.name });
+
 
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

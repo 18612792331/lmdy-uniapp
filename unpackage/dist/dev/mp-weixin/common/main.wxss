@@ -42,6 +42,11 @@
 	height: 100%;
 	width: 100%;
 }
+.status_bar {
+	height: 25px;
+	width: 100%;
+	background-color: #2b85e4;
+}
 .kg {
 	width: 10rpx;
 }
@@ -118,63 +123,64 @@
 }
 /* ====================================================================list页面 */
 .switch-content {
-  padding-bottom: 30rpx;
+	padding-bottom: 30rpx;
 }
 .movie-section {
-  position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-  height: 228rpx;
-  padding: 0 30rpx;
+	position: relative;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	height: 228rpx;
+	padding: 0 30rpx;
 }
-.movie-section::after{
-  position: absolute;
-  content: '';
-  height: 0;
-  width: calc(100% - 208rpx);
-  right:30rpx;
-  bottom:0;
-  border-bottom: 1px solid #f0f0f0;
+.movie-section::after {
+	position: absolute;
+	content: '';
+	height: 0;
+	width: calc(100% - 208rpx);
+	right: 30rpx;
+	bottom: 0;
+	border-bottom: 1px solid #f0f0f0;
 }
 .movie-info {
-  margin: 0 20rpx;
-  font-size: 26rpx;
-  color: #666;
-  width: 70%;
+	margin: 0 20rpx;
+	font-size: 26rpx;
+	color: #666;
+	width: 70%;
 }
 .movie-info>view {
-  margin-bottom: 6rpx;
+	margin-bottom: 6rpx;
 }
 .movie-img {
-  width: 128rpx;
-  height: 180rpx;
+	width: 128rpx;
+	height: 180rpx;
 }
 .movie-name {
-  font-size: 34rpx;
-  color: #333;
-  padding-right: 10rpx;
+	font-size: 34rpx;
+	color: #333;
+	padding-right: 10rpx;
 }
-.version{
-  display: inline-block;
-  height: 28rpx;
-  background-size: contain;
-  background-repeat: no-repeat;
-  margin-left: 10rpx;
-  margin-top: 10rpx;
+.version {
+	display: inline-block;
+	height: 28rpx;
+	background-size: contain;
+	background-repeat: no-repeat;
+	margin-left: 10rpx;
+	margin-top: 10rpx;
+	font-size: 20rpx;
 }
 .grade {
-  font-weight: 700;
-  color: #faaf00;
-  font-size: 30rpx;
+	font-weight: 700;
+	color: #faaf00;
+	font-size: 30rpx;
 }
 .line-ellipsis {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 .u-relative,
 .u-rela {

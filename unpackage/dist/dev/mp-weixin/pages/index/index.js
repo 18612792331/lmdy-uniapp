@@ -94,13 +94,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   uSearch: function() {
-    return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-search/u-search */ "node-modules/uview-ui/components/u-search/u-search").then(__webpack_require__.bind(null, /*! uview-ui/components/u-search/u-search.vue */ 69))
+    return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-search/u-search */ "node-modules/uview-ui/components/u-search/u-search").then(__webpack_require__.bind(null, /*! uview-ui/components/u-search/u-search.vue */ 85))
   },
   uSection: function() {
-    return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-section/u-section */ "node-modules/uview-ui/components/u-section/u-section").then(__webpack_require__.bind(null, /*! uview-ui/components/u-section/u-section.vue */ 76))
+    return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-section/u-section */ "node-modules/uview-ui/components/u-section/u-section").then(__webpack_require__.bind(null, /*! uview-ui/components/u-section/u-section.vue */ 92))
   },
   uImage: function() {
-    return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-image/u-image */ "node-modules/uview-ui/components/u-image/u-image").then(__webpack_require__.bind(null, /*! uview-ui/components/u-image/u-image.vue */ 83))
+    return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-image/u-image */ "node-modules/uview-ui/components/u-image/u-image").then(__webpack_require__.bind(null, /*! uview-ui/components/u-image/u-image.vue */ 99))
   }
 }
 var render = function() {
@@ -177,26 +177,47 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
     return {
       dyData: [],
       dsjData: [],
+      dmData: [],
       pageUtil: {
         pageNo: 1,
         pageSize: 6,
-        type: 1 } };
+        type: 1 },
 
+      keyword: '' };
 
   },
   onLoad: function onLoad() {
     this.dyPage();
     this.dsjPage();
+    this.dmPage();
 
   },
   methods: {
-    dyMore: function dyMore(type) {
+    more: function more(type) {
       this.$u.route({
         url: 'pages/list/index',
         params: {
@@ -230,6 +251,24 @@ var _default =
         _this2.dsjData = res.content;
 
       });
+    },
+    dmPage: function dmPage() {var _this3 = this;
+      var uri = '/page?pageNo=1&pageSize=' + this.pageUtil.pageSize + '&type=4';
+      this.$u.get(uri, {}).
+
+      then(function (res) {
+        _this3.dmData = res.content;
+
+      });
+    },
+    goSearch: function goSearch() {
+      console.log(this.keyword);
+      this.$u.route({
+        url: 'pages/search/index/index',
+        params: {
+          keyword: this.keyword } });
+
+
     } } };exports.default = _default;
 
 /***/ }),

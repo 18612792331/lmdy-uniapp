@@ -90,7 +90,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components
+var components = {
+  uBackTop: function() {
+    return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-back-top/u-back-top */ "node-modules/uview-ui/components/u-back-top/u-back-top").then(__webpack_require__.bind(null, /*! uview-ui/components/u-back-top/u-back-top.vue */ 127))
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -98,10 +102,12 @@ var render = function() {
   var l0 = _vm.__map(_vm.data, function(item, index) {
     var $orig = _vm.__get_orig(item)
 
-    var g0 = item.actor ? item.actor.join(", ") : null
+    var g0 = item.alias ? item.alias.replace("：", "") : null
+    var g1 = item.actor ? item.actor.join(", ") : null
     return {
       $orig: $orig,
-      g0: g0
+      g0: g0,
+      g1: g1
     }
   })
 
@@ -177,9 +183,7 @@ var _default =
 {
   data: function data() {
     return {
-      screenHeight: 0, //屏幕高度
-      bottomDistinct: 200, //距离底部多少像素时触发
-      isLoading: false, //防止频繁触发
+
       data: [],
       pageUtil: {
         pageNo: 1,
@@ -190,71 +194,77 @@ var _default =
 
   },
   methods: {
-    page: function page() {var _this = this;
-      uni.showToast({
-        icon: "loading",
-        title: "加载数据" });
+    detail: function detail(item) {
+      this.$u.route({
+        url: 'pages/detailInfo/index',
+        params: {
+          data: JSON.stringify(item) } });
 
+
+    },
+    page: function page() {var _this = this;
+      uni.showLoading({
+        title: '加载中',
+        mask: true });
+
+      uni.showNavigationBarLoading();
       var uri = '/page?pageNo=' + this.pageUtil.pageNo + '&pageSize=' + this.pageUtil.pageSize + '&type=' + this.pageUtil.
       type;
       this.$u.get(uri, {}).
 
       then(function (res) {var _this$data;
+
         (_this$data = _this.data).push.apply(_this$data, _toConsumableArray(res.content));
         uni.hideLoading();
-        //恢复事件触发
-        _this.isLoading = false;
-
+        uni.hideNavigationBarLoading();
 
       });
+
     },
 
     /**
         *  页面滑动事件
         */
-    onPageScroll: function onPageScroll(e) {var _this2 = this;
-      // this.scrollTop = e.scrollTop;
-      var scrollTop = e.scrollTop; //滚动条距离页面顶部的像素
-      // console.log('scrollTop', scrollTop)
+    onPageScroll: function onPageScroll(e) {
+      this.scrollTop = e.scrollTop;
 
-      //防止重复触发
-      if (this.isLoading) {
-        return;
-      }
-
-      var query = uni.createSelectorQuery().in(this);
-      query.select('#listArea').boundingClientRect(function (data) {
-        // console.log('bottomDistinct', this.bottomDistinct)
-        var height = data.height; //listArea节点的高度
-        // console.log('height', height)
-        //如果设置的事件触发距离 大于等于 (节点的高度-屏幕高度-滚动条到顶部的距离)
-        if (_this2.bottomDistinct >= height - _this2.screenHeight - scrollTop) {
-          //阻止时间重复触发
-          _this2.isLoading = true;
-          _this2.pageUtil.pageNo++;
-          _this2.page();
-
-
-          // setTimeout(() => {
-          // 	//测试数据
-          // 	let arr = new Array(5).fill(0);
-          // 	arr = arr.map((v, i) => this.info.length + i + 1);
-
-          // 	//数据填充
-          // 	this.info = this.info.concat(arr);
-          // 	//恢复事件触发
-          // 	this.isLoading = false;
-          // }, 1500);
-        }
-      }).exec();
+    },
+    onReachBottom: function onReachBottom() {
+      console.log('到底');
+      this.pageUtil.pageNo++;
+      this.page();
     } },
 
   onLoad: function onLoad(option) {
-    //页面加载时取得屏幕高度
-    this.screenHeight = uni.getSystemInfoSync().screenHeight;
-    console.log('type', option.type);
     this.pageUtil.type = option.type;
     this.page();
+  },
+  onReady: function onReady() {
+    uni.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#2b85e4',
+      animation: {
+        duration: 1500,
+        timingFunc: 'easeIn' } });
+
+
+    if (this.pageUtil.type == 1) {
+      uni.setNavigationBarTitle({
+        title: '最新电影' });
+
+    }
+    if (this.pageUtil.type == 2) {
+      uni.setNavigationBarTitle({
+        title: '最新剧集' });
+
+    }
+    if (this.pageUtil.type == 1) {
+      uni.setNavigationBarTitle({
+        title: '最新动漫' });
+
+    }
+
+
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
