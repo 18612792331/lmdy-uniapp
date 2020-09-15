@@ -96,6 +96,9 @@ var components = {
   uSearch: function() {
     return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-search/u-search */ "node-modules/uview-ui/components/u-search/u-search").then(__webpack_require__.bind(null, /*! uview-ui/components/u-search/u-search.vue */ 85))
   },
+  uTabs: function() {
+    return Promise.all(/*! import() | node-modules/uview-ui/components/u-tabs/u-tabs */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-tabs/u-tabs")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-tabs/u-tabs.vue */ 195))
+  },
   uImage: function() {
     return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-image/u-image */ "node-modules/uview-ui/components/u-image/u-image").then(__webpack_require__.bind(null, /*! uview-ui/components/u-image/u-image.vue */ 99))
   },
@@ -168,6 +171,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -193,16 +200,35 @@ var _default =
       pageUtil: {
         pageNo: 1,
         pageSize: 39,
-        type: 1 },
+        type: 1,
+        area: '',
+        genre: '' },
 
       data: [],
-      scrollTop: 0 };
+      scrollTop: 0,
+      areaList: [],
+      areaCurrent: 0,
+      genreList: [],
+      genreCurrent: 0 };
 
   },
   methods: {
+    genreChange: function genreChange(index) {
+      this.genreCurrent = index;
+      var genre = this.genreList[index];
+      this.pageUtil.genre = genre.name;
+      this.restPageData();
+    },
+    areaChange: function areaChange(index) {
+      this.areaCurrent = index;
+      var area = this.areaList[index];
+      this.pageUtil.area = area.condition;
+      this.restPageData();
+    },
     tabc: function tabc(item) {
       this.tab_current = item.index;
       this.pageUtil.type = item.type;
+      this.getCondition(this.pageUtil.type);
       this.restPageData();
     },
     restPageData: function restPageData() {var _this = this;
@@ -210,7 +236,7 @@ var _default =
         title: '加载中',
         mask: true });
 
-      var uri = '/page?pageNo=1&pageSize=' + this.pageUtil.pageSize + '&type=' + this.pageUtil.type;
+      var uri = '/page?pageNo=1&pageSize=' + this.pageUtil.pageSize + '&type=' + this.pageUtil.type + '&area=' + this.pageUtil.area + '&genre=' + this.pageUtil.genre;
       this.$u.get(uri, {}).
 
       then(function (res) {
@@ -223,7 +249,7 @@ var _default =
         title: '加载中',
         mask: true });
 
-      var uri = '/page?pageNo=1&pageSize=' + this.pageUtil.pageSize + '&type=' + this.pageUtil.type;
+      var uri = '/page?pageNo=1&pageSize=' + this.pageUtil.pageSize + '&type=' + this.pageUtil.type + '&area=' + this.pageUtil.area + '&genre=' + this.pageUtil.genre;
       this.$u.get(uri, {}).
 
       then(function (res) {var _this2$data;
@@ -244,18 +270,36 @@ var _default =
       this.pageData();
     },
     goSearch: function goSearch() {
-      console.log(this.keyword);
       this.$u.route({
         url: 'pages/search/index/index',
         params: {
           keyword: this.keyword } });
 
 
+    },
+    getCondition: function getCondition(type) {var _this3 = this;
+      uni.showLoading({
+        title: '加载中',
+        mask: true });
+
+      var uri = '/condition/' + type;
+      this.$u.get(uri, {}).
+
+      then(function (res) {
+
+        _this3.areaList = res.areaDTOList;
+        _this3.genreList = [];
+        res.genreList.forEach(function (data) {
+          _this3.genreList.push({ name: data });
+        });
+        uni.hideLoading();
+      });
     } },
 
 
   onLoad: function onLoad() {
     this.pageData();
+    this.getCondition(this.pageUtil.type);
 
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

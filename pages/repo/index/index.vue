@@ -13,6 +13,10 @@
 				</view>
 			</view>
 		</view>
+		<view style="margin-top: 20rpx;">
+			<u-tabs name="title" :list="areaList" :current="areaCurrent" @change="areaChange"></u-tabs>
+			<u-tabs name="name" :list="genreList" :current="genreCurrent" @change="genreChange"></u-tabs>
+		</view>
 		<view class="dy_box">
 			<view class="box_child" v-for="(item, index) in data" @click="detail(item)">
 				<u-image width="100%" height="280rpx" fade="true" :duration="1000" :src="item.cover"></u-image>
@@ -51,16 +55,35 @@
 				pageUtil: {
 					pageNo: 1,
 					pageSize: 39,
-					type: 1
+					type: 1,
+					area: '',
+					genre: '',
 				},
 				data: [],
-				scrollTop: 0
+				scrollTop: 0,
+				areaList: [],
+				areaCurrent: 0,
+				genreList: [],
+				genreCurrent: 0,
 			}
 		},
 		methods: {
+			genreChange(index) {
+				this.genreCurrent = index;
+				let genre = this.genreList[index];
+				this.pageUtil.genre = genre.name;
+				this.restPageData();
+			},
+			areaChange(index) {
+				this.areaCurrent = index;
+				let area = this.areaList[index];
+				this.pageUtil.area = area.condition;
+				this.restPageData();
+			},
 			tabc(item) {
 				this.tab_current = item.index;
 				this.pageUtil.type = item.type;
+				this.getCondition(this.pageUtil.type);
 				this.restPageData();
 			},
 			restPageData() {
@@ -68,7 +91,7 @@
 					title: '加载中',
 					mask: true
 				});
-				let uri = '/page?pageNo=1&pageSize=' + this.pageUtil.pageSize + '&type=' + this.pageUtil.type
+				let uri = '/page?pageNo=1&pageSize=' + this.pageUtil.pageSize + '&type=' + this.pageUtil.type + '&area=' + this.pageUtil.area + '&genre=' + this.pageUtil.genre;
 				this.$u.get(uri, {
 				
 				}).then(res => {
@@ -81,7 +104,7 @@
 					title: '加载中',
 					mask: true
 				});
-				let uri = '/page?pageNo=1&pageSize=' + this.pageUtil.pageSize + '&type=' + this.pageUtil.type
+				let uri = '/page?pageNo=1&pageSize=' + this.pageUtil.pageSize + '&type=' + this.pageUtil.type + '&area=' + this.pageUtil.area + '&genre=' + this.pageUtil.genre;
 				this.$u.get(uri, {
 
 				}).then(res => {
@@ -102,18 +125,36 @@
 				this.pageData();
 			},
 			goSearch() {
-				console.log(this.keyword)
 				this.$u.route({
 					url: 'pages/search/index/index',
 					params: {
 						keyword: this.keyword
 					}
 				})
+			},
+			getCondition(type) {
+				uni.showLoading({
+					title: '加载中',
+					mask: true
+				});
+				let uri = '/condition/' + type
+				this.$u.get(uri, {
+				
+				}).then(res => {
+					
+					this.areaList = res.areaDTOList;
+					this.genreList = [];
+					res.genreList.forEach(data=>{
+						this.genreList.push({name: data})
+					})
+					uni.hideLoading();
+				})
 			}
 
 		},
 		onLoad() {
 			this.pageData();
+			this.getCondition(this.pageUtil.type)
 
 		},
 	}
