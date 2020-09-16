@@ -6,7 +6,8 @@
     "pages/list/index",
     "pages/repo/index/index",
     "pages/search/index/index",
-    "pages/personal/index/index"
+    "pages/personal/index/index",
+    "pages/personal/history/history"
   ],
   "subPackages": [],
   "window": {

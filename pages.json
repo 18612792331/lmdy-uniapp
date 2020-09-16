@@ -29,6 +29,10 @@
             "path" : "pages/personal/index/index",
             "style" : {}
         }
+        ,{
+            "path" : "pages/personal/history/history",
+            "style" : {}
+        }
     ],
 	"tabBar": {
 		"color": "#7f8389",

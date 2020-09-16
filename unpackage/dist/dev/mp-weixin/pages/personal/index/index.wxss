@@ -1,6 +1,7 @@
 
 .tx-w{
-	margin-top:200rpx;
+	margin-top:100rpx;
+	border-bottom:1px solid #ff9900;
 }
 .tx{
 	text-align:center;
@@ -17,6 +18,8 @@
 .name-qm{
 	text-align:center;
 	margin-top:20rpx;
+	margin-bottom: 30rpx;
 	font-size:30rpx;
+	color: #a0cfff;
 }
 
