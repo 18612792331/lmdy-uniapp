@@ -17,6 +17,17 @@
         }, {
             "path" : "pages/list/index",
             "style" : {}
+        }, {
+            "path" : "pages/repo/index/index",
+            "style" : {
+				"navigationStyle": "custom"
+			}
+        }, {
+            "path" : "pages/search/index/index",
+            "style" : {}
+        } ,{
+            "path" : "pages/personal/index/index",
+            "style" : {}
         }
     ],
 	"tabBar": {
@@ -31,15 +42,15 @@
 			"selectedIconPath": "static/icon/diamond_s.png",
 			"text": "推荐"
 		}, {
-			"pagePath": "pages/index/index",
+			"pagePath": "pages/repo/index/index",
 			"iconPath": "static/icon/yuan.png",
 			"selectedIconPath": "static/icon/yuan_s.png",
 			"text": "发现"
 		}, {
-			"pagePath": "pages/index/index",
+			"pagePath": "pages/personal/index/index",
 			"iconPath": "static/icon/form.png",
 			"selectedIconPath": "static/icon/form_s.png",
-			"text": "书架"
+			"text": "个人"
 		}]
 	},
 	"globalStyle": {

@@ -1,0 +1,17 @@
+
+.detail {
+	height: 100%;
+	width: 100%;
+	min-height: 100%;
+	background-color: rgba(30, 41, 61, 0.7);
+	text-align: center;
+	color: #FFFFFF;
+}
+.pic {
+	width: 60%;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+
+

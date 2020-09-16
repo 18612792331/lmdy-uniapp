@@ -1,0 +1,9 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "u-search": "/node-modules/uview-ui/components/u-search/u-search",
+    "u-tabs": "/node-modules/uview-ui/components/u-tabs/u-tabs",
+    "u-image": "/node-modules/uview-ui/components/u-image/u-image",
+    "u-back-top": "/node-modules/uview-ui/components/u-back-top/u-back-top"
+  }
+}

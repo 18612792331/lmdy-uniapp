@@ -1,7 +1,7 @@
 <template>
 	<view class="switch-content">
 		<view id="listArea">
-			<view v-for="(item, index) in data" :key="index" class="movie-section">
+			<view v-for="(item, index) in data" :key="index" class="movie-section"  @click="detail(item)">
 
 				<image class="movie-img" :src="item.cover"></image>
 				<view class="movie-info">
@@ -13,13 +13,13 @@
 							<text>年份：<text class='grade'>{{item.year}}</text></text>
 						</view>
 					</view>
+					<view class="movie-star line-ellipsis" v-if="item.alias">别名：{{item.alias.replace('：', '')}}</view>
 					<view class="movie-star line-ellipsis" v-if="item.area">地区：{{item.area}}</view>
-					<view class="movie-star line-ellipsis" v-if="item.director">导演：{{item.director}}</view>
 					<view class="movie-star line-ellipsis" v-if="item.actor">主演：{{item.actor.join(', ')}}</view>
 				</view>
 
 			</view>
-			<!-- <u-back-top :scroll-top="scrollTop"></u-back-top> -->
+			<u-back-top :scroll-top="scrollTop"></u-back-top>
 		</view>
 
 	</view>
@@ -29,9 +29,7 @@
 	export default {
 		data() {
 			return {
-				screenHeight: 0, //屏幕高度
-				bottomDistinct: 200, //距离底部多少像素时触发
-				isLoading: false, //防止频繁触发
+				
 				data: [],
 				pageUtil: {
 					pageNo: 1,
@@ -42,71 +40,77 @@
 			}
 		},
 		methods: {
-			page() {
-				uni.showToast({
-					icon: "loading",
-					title: "加载数据"
+			detail(item) {
+				this.$u.route({
+					url: 'pages/detailInfo/index',
+					params: {
+						data: JSON.stringify(item)
+					}
 				})
+			},
+			page() {
+				uni.showLoading({
+				    title: '加载中',
+					mask: true
+				});
+				uni.showNavigationBarLoading()
 				let uri = '/page?pageNo=' + this.pageUtil.pageNo + '&pageSize=' + this.pageUtil.pageSize + '&type=' + this.pageUtil
 					.type
 				this.$u.get(uri, {
 
 				}).then(res => {
+					
 					this.data.push(...res.content)
 					uni.hideLoading();
-					//恢复事件触发
-					this.isLoading = false;
-
-
+					uni.hideNavigationBarLoading()
+					
 				})
+
 			},
 
 			/**
 			 *  页面滑动事件
 			 */
 			onPageScroll: function(e) {
-				// this.scrollTop = e.scrollTop;
-				const scrollTop = e.scrollTop; //滚动条距离页面顶部的像素
-				// console.log('scrollTop', scrollTop)
-
-				//防止重复触发
-				if (this.isLoading) {
-					return;
-				}
-
-				const query = uni.createSelectorQuery().in(this);
-				query.select('#listArea').boundingClientRect(data => {
-					// console.log('bottomDistinct', this.bottomDistinct)
-					let height = data.height; //listArea节点的高度
-					// console.log('height', height)
-					//如果设置的事件触发距离 大于等于 (节点的高度-屏幕高度-滚动条到顶部的距离)
-					if (this.bottomDistinct >= height - this.screenHeight - scrollTop) {
-						//阻止时间重复触发
-						this.isLoading = true;
-						this.pageUtil.pageNo++;
-						this.page();
-
-
-						// setTimeout(() => {
-						// 	//测试数据
-						// 	let arr = new Array(5).fill(0);
-						// 	arr = arr.map((v, i) => this.info.length + i + 1);
-
-						// 	//数据填充
-						// 	this.info = this.info.concat(arr);
-						// 	//恢复事件触发
-						// 	this.isLoading = false;
-						// }, 1500);
-					}
-				}).exec();
+				this.scrollTop = e.scrollTop;
+				
+			},
+			onReachBottom() {
+				console.log('到底')
+				this.pageUtil.pageNo++;
+				this.page();
 			}
 		},
 		onLoad(option) {
-			//页面加载时取得屏幕高度
-			this.screenHeight = uni.getSystemInfoSync().screenHeight;
-			console.log('type', option.type)
 			this.pageUtil.type = option.type
 			this.page();
+		},
+		onReady() {
+			uni.setNavigationBarColor({
+			    frontColor: '#ffffff',
+			    backgroundColor: '#2b85e4',
+			    animation: {
+			        duration: 1500,
+			        timingFunc: 'easeIn'
+			    }
+			})
+			if(this.pageUtil.type==1) {
+				uni.setNavigationBarTitle({
+				    title: '最新电影'
+				});
+			}
+			if(this.pageUtil.type==2) {
+				uni.setNavigationBarTitle({
+				    title: '最新剧集'
+				});
+			}
+			if(this.pageUtil.type==1) {
+				uni.setNavigationBarTitle({
+				    title: '最新动漫'
+				});
+			}
+			
+			
 		}
 	}
 </script>

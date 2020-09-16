@@ -1,0 +1,8 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "u-search": "/node-modules/uview-ui/components/u-search/u-search",
+    "u-section": "/node-modules/uview-ui/components/u-section/u-section",
+    "u-image": "/node-modules/uview-ui/components/u-image/u-image"
+  }
+}
