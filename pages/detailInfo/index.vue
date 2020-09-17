@@ -13,7 +13,7 @@
 				<view style="margin-top: 30rpx;">
 					<image mode="aspectFit" style="width: 60%;" :src="data.cover"></image>
 				</view>
-				<view style="margin-top: 30rpx;">
+				<view style="margin-top: 30rpx;" v-if="tag==1">
 					<u-button shape="square" type="primary" size="medium" :ripple="true" ripple-bg-color="#69d1e1" @click="mplay">立即播放</u-button>
 				</view>
 			</view>
@@ -26,14 +26,17 @@
 				<p v-if="data.actor">主演：<span>{{ data.actor.join(', ') }}</span></p>
 				<p v-if="data.introduce" style="font:italic 12px/30px Georgia,serif;">简介：<span>{{ data.introduce }}</span></p>
 				<!-- <p>选集：</p> -->
-				<view style="margin-top: 30rpx;">
-					<view v-for="(item, index) in data.resources" :key="index" class="nav" :class="{ choose:current == index}" @click="cho(index)">{{item.label}}</view>
-				</view>
-				<view>
-					<view v-for="(item, index) in data.resources" :key="index" v-if="index==current" class="player_box">
-						<view v-for="(data, index2) in item.links" :key="index2" class="box_child line-ellipsis" @click="play(data)">{{data.title}}</view>
+				<view v-if="tag==1">
+					<view style="margin-top: 30rpx;">
+						<view v-for="(item, index) in data.resources" :key="index" class="nav" :class="{ choose:current == index}" @click="cho(index)">{{item.label}}</view>
+					</view>
+					<view>
+						<view v-for="(item, index) in data.resources" :key="index" v-if="index==current" class="player_box">
+							<view v-for="(data, index2) in item.links" :key="index2" class="box_child line-ellipsis" @click="play(data)">{{data.title}}</view>
+						</view>
 					</view>
 				</view>
+				
 			</view>
 			<view>
 
@@ -52,6 +55,7 @@
 		    },
 		data() {
 			return {
+				tag: 0,
 				data: {},
 				current: 0,
 
@@ -85,6 +89,8 @@
 
 		},
 		onLoad(option) {
+			const value = uni.getStorageSync('tag');
+			this.tag = value;
 			this.data = JSON.parse(option.data)
 		},
 		onReady() {
