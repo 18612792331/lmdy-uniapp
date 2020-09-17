@@ -2,6 +2,14 @@
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
+			let uri = '/tag';
+			this.$u.get(uri, {
+			
+			}).then(res => {
+				console.log(res)
+				uni.setStorageSync('tag', res);
+			
+			})
 		},
 		onShow: function() {
 			console.log('App Show')

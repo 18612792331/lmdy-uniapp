@@ -4,7 +4,8 @@
 			<!-- 这里是状态栏 -->
 		</view>
 		<view class="search_bar" style="width: 70%;">
-			<u-search @blur="goSearch" placeholder="搜索电影名" :clearabled="true" bg-color="#f7f9fa" v-model="keyword" :show-action="true" action-text="搜索" :animation="true"></u-search>
+			<u-search @blur="goSearch" placeholder="搜索电影名" :clearabled="true" bg-color="#f7f9fa" v-model="keyword" :show-action="true"
+			 action-text="搜索" :animation="true"></u-search>
 		</view>
 		<view class="tab">
 			<view v-for="(item, index) in tab" :key="index" @click="tabc(item)">
@@ -27,6 +28,7 @@
 				</view>
 			</view>
 		</view>
+		<u-divider v-if="!add">我是有底线的</u-divider>
 		<u-back-top :scroll-top="scrollTop"></u-back-top>
 	</view>
 </template>
@@ -99,6 +101,8 @@
 					name: '更早'
 				}],
 				yearCurrent: 0,
+
+				add: true
 			}
 		},
 		methods: {
@@ -111,28 +115,32 @@
 				})
 			},
 			yearChange(index) {
+				this.add = true;
 				this.yearCurrent = index;
 				this.pageUtil.year = this.yearList[index].name
 				this.restPageData();
 			},
 			genreChange(index) {
+				this.add = true;
 				this.genreCurrent = index;
 				let genre = this.genreList[index];
 				this.pageUtil.genre = genre.name;
 				this.restPageData();
 			},
 			areaChange(index) {
+				this.add = true;
 				this.areaCurrent = index;
 				let area = this.areaList[index];
 				this.pageUtil.area = area.condition;
 				this.restPageData();
 			},
 			tabc(item) {
+				this.add = true;
 				this.yearCurrent = 0;
 				this.areaCurrent = 0;
 				this.genreCurrent = 0;
 				this.tab_current = item.index;
-			
+
 				this.pageUtil.area = '';
 				this.pageUtil.genre = '';
 				this.pageUtil.year = '';
@@ -145,38 +153,60 @@
 					title: '加载中',
 					mask: true
 				});
-				let uri = '/page?pageNo=1&pageSize=' + this.pageUtil.pageSize + '&type=' + this.pageUtil.type + '&area=' + this.pageUtil.area + '&genre=' + this.pageUtil.genre + '&year=' + this.pageUtil.year;
+				let uri = '/page?pageNo=1&pageSize=' + this.pageUtil.pageSize + '&type=' + this.pageUtil.type + '&area=' + this.pageUtil
+					.area + '&genre=' + this.pageUtil.genre + '&year=' + this.pageUtil.year;
 				this.$u.get(uri, {
-				
+
 				}).then(res => {
 					this.data = res.content;
 					uni.hideLoading();
 				})
 			},
-			pageData() {
-				uni.showLoading({
-					title: '加载中',
-					mask: true
-				});
-				let uri = '/page?pageNo=1&pageSize=' + this.pageUtil.pageSize + '&type=' + this.pageUtil.type + '&area=' + this.pageUtil.area + '&genre=' + this.pageUtil.genre + '&year=' + this.pageUtil.year;
-				this.$u.get(uri, {
+			pageData(scroll) {
+				if (this.add) {
+					console.log(this.scrollTop)
+					uni.showLoading({
+						title: '加载中',
+						mask: true
+					});
+					let uri = '/page?pageNo=' + this.pageUtil.pageNo + '&pageSize=' + this.pageUtil.pageSize + '&type=' + this.pageUtil.type + '&area=' + this.pageUtil
+						.area + '&genre=' + this.pageUtil.genre + '&year=' + this.pageUtil.year;
+					this.$u.get(uri, {
 
-				}).then(res => {
-					this.data.push(...res.content)
-					uni.hideLoading();
-				})
+					}).then(res => {
+					
+						if (res.content.length > 0) {
+							this.data.push(...res.content)
+							if (scroll) {
+								this.$nextTick(function(){
+									uni.pageScrollTo({
+									    scrollTop: this.scrollTop + 300,
+									    duration: 1500
+									});
+								})
+							}
+							
+							
+						} else {
+							this.add = false;
+						}
+
+						uni.hideLoading();
+					})
+				}
+
 			},
 			/**
 			 *  页面滑动事件
 			 */
 			onPageScroll: function(e) {
 				this.scrollTop = e.scrollTop;
-				
+
 			},
 			onReachBottom() {
 				console.log('到底')
-				this.pageUtil.pageNo++;
-				this.pageData();
+				this.pageUtil.pageNo+=1;
+				this.pageData(true);
 			},
 			goSearch() {
 				this.$u.route({
@@ -193,13 +223,15 @@
 				});
 				let uri = '/condition/' + type
 				this.$u.get(uri, {
-				
+
 				}).then(res => {
-					
+
 					this.areaList = res.areaDTOList;
 					this.genreList = [];
-					res.genreList.forEach(data=>{
-						this.genreList.push({name: data})
+					res.genreList.forEach(data => {
+						this.genreList.push({
+							name: data
+						})
 					})
 					uni.hideLoading();
 				})
@@ -207,7 +239,7 @@
 
 		},
 		onLoad() {
-			this.pageData();
+			this.pageData(false);
 			this.getCondition(this.pageUtil.type)
 
 		},
@@ -250,6 +282,7 @@
 		position: relative;
 		text-align: center;
 	}
+
 	.tip {
 		background: #000;
 		opacity: 0.5;
@@ -261,8 +294,9 @@
 		font-size: 25rpx;
 		border-radius: 10rpx;
 	}
+
 	.name {
-		color: #303133 ;
+		color: #303133;
 		font-weight: 800;
 	}
 </style>

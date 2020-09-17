@@ -117,9 +117,6 @@
 	-webkit-flex: 0 0 20%;
 	        flex: 0 0 20%;
 	margin-bottom: 20px;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
 }
 /* ====================================================================list页面 */
 .switch-content {

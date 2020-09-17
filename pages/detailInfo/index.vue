@@ -4,6 +4,7 @@
 			<image style="height: 100%;width: 100%;" mode="aspectFill" :src="data.cover"></image>
 		</view>
 		<view class="detail">
+			<div style="height: 50rpx;"></div>
 			<view>
 				<span class="g-font-46" style="text-shadow: 5px 6px 2px #83ACDB">{{data.name}}</span>
 				<span v-if="data.year">{{data.year}}</span>
@@ -30,7 +31,7 @@
 				</view>
 				<view>
 					<view v-for="(item, index) in data.resources" :key="index" v-if="index==current" class="player_box">
-						<view v-for="(data, index2) in item.links" :key="index2" class="box_child" @click="play(data)">{{data.title}}</view>
+						<view v-for="(data, index2) in item.links" :key="index2" class="box_child line-ellipsis" @click="play(data)">{{data.title}}</view>
 					</view>
 				</view>
 			</view>
@@ -86,6 +87,20 @@
 		onLoad(option) {
 			this.data = JSON.parse(option.data)
 		},
+		onReady() {
+			uni.setNavigationBarColor({
+				frontColor: '#ffffff',
+				backgroundColor: '#2b85e4',
+				animation: {
+					duration: 1500,
+					timingFunc: 'easeIn'
+				}
+			})
+			uni.setNavigationBarTitle({
+				title: this.data.name
+			});
+		
+		}
 	}
 </script>
 

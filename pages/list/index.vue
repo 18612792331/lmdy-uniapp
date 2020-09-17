@@ -13,7 +13,8 @@
 							<text>年份：<text class='grade'>{{item.year}}</text></text>
 						</view>
 					</view>
-					<view class="movie-star line-ellipsis" v-if="item.alias">别名：{{item.alias.replace('：', '')}}</view>
+					<!-- {{item.alias}} -->
+					<view class="movie-star line-ellipsis" v-if="item.alias!=null">类型：{{item.genre}}</view>
 					<view class="movie-star line-ellipsis" v-if="item.area">地区：{{item.area}}</view>
 					<view class="movie-star line-ellipsis" v-if="item.actor">主演：{{item.actor.join(', ')}}</view>
 				</view>
@@ -48,7 +49,7 @@
 					}
 				})
 			},
-			page() {
+			page(scroll) {
 				uni.showLoading({
 				    title: '加载中',
 					mask: true
@@ -63,6 +64,14 @@
 					this.data.push(...res.content)
 					uni.hideLoading();
 					uni.hideNavigationBarLoading()
+					if (scroll) {
+						this.$nextTick(function(){
+							uni.pageScrollTo({
+							    scrollTop: this.scrollTop + 300,
+							    duration: 1500
+							});
+						})
+					}
 					
 				})
 
@@ -78,12 +87,12 @@
 			onReachBottom() {
 				console.log('到底')
 				this.pageUtil.pageNo++;
-				this.page();
+				this.page(true);
 			}
 		},
 		onLoad(option) {
 			this.pageUtil.type = option.type
-			this.page();
+			this.page(false);
 		},
 		onReady() {
 			uni.setNavigationBarColor({

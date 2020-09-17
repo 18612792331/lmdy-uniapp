@@ -4,6 +4,7 @@
     "u-search": "/node-modules/uview-ui/components/u-search/u-search",
     "u-tabs": "/node-modules/uview-ui/components/u-tabs/u-tabs",
     "u-image": "/node-modules/uview-ui/components/u-image/u-image",
+    "u-divider": "/node-modules/uview-ui/components/u-divider/u-divider",
     "u-back-top": "/node-modules/uview-ui/components/u-back-top/u-back-top"
   }
 }

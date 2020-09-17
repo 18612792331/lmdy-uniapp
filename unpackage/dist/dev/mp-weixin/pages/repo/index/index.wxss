@@ -53,7 +53,7 @@
 	border-radius: 10rpx;
 }
 .name {
-	color: #303133 ;
+	color: #303133;
 	font-weight: 800;
 }
 
