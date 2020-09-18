@@ -24,7 +24,7 @@
 				<p v-if="data.language">语言：<span>{{ data.language }}</span></p>
 				<p v-if="data.director">导演：<span>{{ data.director }}</span></p>
 				<p v-if="data.actor">主演：<span>{{ data.actor.join(', ') }}</span></p>
-				<p v-if="data.introduce" style="font:italic 12px/30px Georgia,serif;">简介：<span>{{ data.introduce }}</span></p>
+				<p v-if="data.introduce && tag==1" style="font:italic 12px/30px Georgia,serif;">简介：<span>{{ data.introduce }}</span></p>
 				<!-- <p>选集：</p> -->
 				<view v-if="tag==1">
 					<view style="margin-top: 30rpx;">
